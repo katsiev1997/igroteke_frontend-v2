@@ -1,0 +1,36 @@
+.loader {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  display: inline-block;
+  border-top: 10px solid #FFF;
+  border-right: 10px solid transparent;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+.black_screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  background: #0000005c;
+}
+.loading {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+} 

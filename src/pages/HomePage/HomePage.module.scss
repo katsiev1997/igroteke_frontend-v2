@@ -1,0 +1,67 @@
+.list_group_item {
+  font-size: 20px;
+  font-weight: 200;
+  height: 35px;
+}
+.time_status_rooms {
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+}
+.time_status {
+  border-right: 1px solid #fff;
+  display: flex;
+  width: 75%;
+  height: 65vh;
+  overflow-y: scroll;
+}
+.play_rooms {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  max-width: 100px;
+  width: 100%;
+  gap: 5px;
+}
+
+.room {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  width: 2.5em;
+  height: 2.5em;
+  border-radius: 25%;
+}
+.room.active {
+  background: #fff;
+  color: #000;
+}
+hr {
+  margin: 5px;
+}
+li {
+  font-size: 24px;
+  font-weight: 600;
+}
+.phone {
+  margin-top: 5px;
+  font-size: 25px;
+}
+.clubName {
+  filter: invert(85%);
+  font-size: 20px !important;
+  font-weight: 600 !important;
+  & div {
+    font-size: 20px;
+    font-weight: 600;
+    & span {
+      font-size: 20px;
+    }
+  }
+}
+
+.play_room_text {
+  text-align: center;
+}
