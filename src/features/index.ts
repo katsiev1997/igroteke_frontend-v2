@@ -1,1 +1,1 @@
-export { Reserve } from './Reserve/ui/Reserve';
+export { Reserve } from './Reserve/ui/ReserveAdmin';

@@ -1,20 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { getAuthData } from '../service/getAuthData';
-import { CustomerSliceState } from '../types/customer';
-import { customerLogout } from '../service/customerLogout'
+import { AdminSliceState } from '../types/admin';
+import { adminLogout } from '../service/adminLogout'
 
-const initialState: CustomerSliceState = {
-  customer: null,
+const initialState: AdminSliceState = {
+  admin: null,
   loading: false,
 };
 
-const customerSlice = createSlice({
-  name: 'customer',
+const adminSlice = createSlice({
+  name: 'admin',
   initialState,
   reducers: {
     setAuthData: (state, action) => {
       console.log(action.payload);
-      state.customer = action.payload;
+      state.admin = action.payload;
     },
   },
   extraReducers(builder) {
@@ -28,18 +28,18 @@ const customerSlice = createSlice({
       .addCase(getAuthData.rejected, (state) => {
         state.loading = false;
       })
-      .addCase(customerLogout.pending, (state) => {
+      .addCase(adminLogout.pending, (state) => {
         state.loading = true;
       })
-      .addCase(customerLogout.fulfilled, (state) => {
+      .addCase(adminLogout.fulfilled, (state) => {
         state.loading = false;
-        state.customer = null;
+        state.admin = null;
       })
-      .addCase(customerLogout.rejected, (state) => {
+      .addCase(adminLogout.rejected, (state) => {
         state.loading = false;
       });
   },
 });
 
-export const setAuthData = customerSlice.actions.setAuthData;
-export const customer = customerSlice.reducer;
+export const setAuthData = adminSlice.actions.setAuthData;
+export const admin = adminSlice.reducer;

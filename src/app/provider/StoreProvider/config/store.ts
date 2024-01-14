@@ -2,14 +2,14 @@ import { configureStore, ReducersMapObject } from '@reduxjs/toolkit';
 import { StateSchema } from './StateSchema';
 import { $api } from 'src/shared/api';
 import { club } from 'src/entities/Club';
-import { customer } from 'src/entities/Customer';
+import { admin } from 'src/entities/Admin';
 import { reserve } from 'src/features/Reserve';
 import { auth } from 'src/features/auth';
 
 export const createStore = () => {
   const rootReducers: ReducersMapObject<StateSchema> = {
     club,
-    customer,
+    admin,
     auth,
     reserve,
   };

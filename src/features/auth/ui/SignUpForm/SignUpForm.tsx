@@ -1,24 +1,19 @@
 import {
-  CheckCircleOutlined,
   IdcardOutlined,
   LockOutlined,
   PhoneOutlined,
 } from '@ant-design/icons';
-import { Button, Checkbox, Form, Input, message } from 'antd';
-import type { CheckboxChangeEvent } from 'antd/es/checkbox';
-import React from 'react';
-import cls from './SignUpForm.module.scss';
-import { Link, useNavigate } from 'react-router-dom';
-import { customerData } from '../../model/types/customer';
-import { adminData } from '../../model/types/admin';
-import { customerSignup } from '../..';
-import { useAppDispatch } from 'src/shared/hooks/useAppDispatch';
+import { Button, Form, Input, message } from 'antd';
 import { useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 import { StateSchema } from 'src/app/provider/StoreProvider/config/StateSchema';
+import { useAppDispatch } from 'src/shared/hooks/useAppDispatch';
 import { Loading } from 'src/shared/ui/Loading/Loading';
+import { adminSignup } from '../..';
+import { adminData } from '../../model/types/auth';
+import cls from './SignUpForm.module.scss';
 
 export const SignUpForm = () => {
-  const [isAdmin, setIsAdmin] = React.useState<boolean>(false);
   const [messageApi, contextHolder] = message.useMessage();
   const error = useSelector((state: StateSchema) => state.auth.error);
   const loading = useSelector((state: StateSchema) => state.auth.loading);
@@ -44,8 +39,8 @@ export const SignUpForm = () => {
       },
     });
   };
-  const onSubmit = async (values: customerData | adminData) => {
-    const res = await dispatch(customerSignup(values));
+  const onSubmit = async (values: adminData) => {
+    const res = await dispatch(adminSignup(values));
     const { password, confirmPassword } = values;
     if (password !== confirmPassword) {
       errorMessage('Пароли не совпадают!');
@@ -68,9 +63,6 @@ export const SignUpForm = () => {
         offset: 8,
       },
     },
-  };
-  const onChange = (e: CheckboxChangeEvent) => {
-    setIsAdmin(e.target.checked);
   };
   return (
     <div className={cls.form}>
@@ -124,19 +116,8 @@ export const SignUpForm = () => {
             placeholder='Повторите пароль...'
           />
         </Form.Item>
-        <Form.Item
-          name='code'
-          rules={[{ required: true, message: 'Введите код!' }]}
-        >
-          <Input
-            prefix={<CheckCircleOutlined className='site-form-item-icon' />}
-            size='large'
-            placeholder='Проверочный код...'
-          />
-        </Form.Item>
-        {isAdmin && (
           <Form.Item
-            name='idClub'
+            name='clubId'
             rules={[
               {
                 required: true,
@@ -149,12 +130,6 @@ export const SignUpForm = () => {
               placeholder='ID club'
             />
           </Form.Item>
-        )}
-        <Form.Item>
-          <Checkbox onChange={onChange} style={{ color: '#fff', fontSize: '16px' }}>
-            Администратор
-          </Checkbox>
-        </Form.Item>
         <Form.Item style={{ color: '#fff' }}>
           У вас уже есть аккаунт?{' '}
           <Link style={{ color: '#09f' }} to='/login'>

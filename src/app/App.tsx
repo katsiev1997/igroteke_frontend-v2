@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { getAuthData } from 'src/entities/Customer';
+import { getAuthData } from 'src/entities/Admin';
 import { useAppDispatch } from 'src/shared/hooks/useAppDispatch';
 import { Header } from '../widgets/Header/ui/Header';
 import RouteProvider from './provider/RouteProvider/RouteProvider';

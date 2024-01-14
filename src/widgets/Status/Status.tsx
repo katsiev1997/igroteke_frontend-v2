@@ -12,10 +12,7 @@ interface StatusProps {
 export const Status: React.FC<StatusProps> = ({ timeSlots }) => {
   const dispatch = useAppDispatch();
   const { from, to } = useSelector((state: StateSchema) => state.reserve);
-  const { customer } = useSelector((state: StateSchema) => state.customer);
   const setTime = (time: number) => {
-    if (!customer) return;
-    if (customer.booking !== null) return;
     dispatch(setTimeReserve(time));
   };
   return (

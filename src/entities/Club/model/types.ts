@@ -1,5 +1,7 @@
 interface bookingType {
-  customerId: string;
+  _id: string; 
+  customerData: string;
+  roomName: string;
   from: number;
   to: number;
 }

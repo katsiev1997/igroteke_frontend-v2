@@ -10,11 +10,11 @@ import {
 import { Select } from 'antd';
 import { StateSchema } from 'src/app/provider/StoreProvider/config/StateSchema';
 import { fetchClubs } from 'src/entities/Club';
-import { Reserve } from 'src/features';
 import { setClub, setRoom, setTimeReserve } from 'src/features/Reserve';
 import { useAppDispatch } from 'src/shared/hooks/useAppDispatch';
 import { Status, Time } from 'src/widgets';
 import { Loading } from 'src/shared/ui/Loading/Loading';
+import { ReserveClient } from 'src/features/Reserve/ui/ReserveClient';
 
 export const HomePage: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -115,11 +115,7 @@ export const HomePage: React.FC = () => {
                     </div>
                   ))}
                 </div>
-                <Reserve
-                  nameClub={Club.name}
-                  idClub={Club._id}
-                  roomNum={room}
-                />
+                <ReserveClient />
               </div>
             )}
           </div>

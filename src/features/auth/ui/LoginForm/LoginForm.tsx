@@ -1,16 +1,15 @@
 import { LockOutlined, PhoneOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input, message } from 'antd';
 import { CheckboxChangeEvent } from 'antd/es/checkbox';
-import { Link } from 'react-router-dom';
-import cls from './LoginForm.module.scss';
 import React from 'react';
-import { customerData } from '../../model/types/customer';
-import { adminData } from '../../model/types/admin';
-import { useAppDispatch } from 'src/shared/hooks/useAppDispatch';
-import { customerLogin } from '../..';
-import { StateSchema } from 'src/app/provider/StoreProvider/config/StateSchema';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { StateSchema } from 'src/app/provider/StoreProvider/config/StateSchema';
+import { useAppDispatch } from 'src/shared/hooks/useAppDispatch';
 import { Loading } from 'src/shared/ui/Loading/Loading';
+import { adminLogin } from '../..';
+import { adminData } from '../../model/types/admin';
+import cls from './LoginForm.module.scss';
 
 export const LoginForm = () => {
   const [isAdmin, setIsAdmin] = React.useState<boolean>(false);
@@ -31,13 +30,13 @@ export const LoginForm = () => {
       },
     });
   };
-  const onSubmit = async (values: customerData | adminData) => {
-    const res = await dispatch(customerLogin(values));
+  const onSubmit = async (values: adminData | adminData) => {
+    const res = await dispatch(adminLogin(values));
     if (res.meta.requestStatus === 'fulfilled') {
-      successMessage('Вы авторизовались!')
+      successMessage('Вы авторизовались!');
       setTimeout(() => {
-        window.location.href = '/'
-      },1000)
+        window.location.href = '/';
+      }, 1000);
     }
   };
   console.log(isAdmin);
@@ -101,13 +100,13 @@ export const LoginForm = () => {
           </Form.Item>
         )}
         <Form.Item>
-          <span style={{ color: '#fff' }}> У вас нет аккаунта?  </span>{' '}
+          <span style={{ color: '#fff' }}> У вас нет аккаунта? </span>{' '}
           <Link style={{ color: '#09f' }} to='/signup'>
             Зарегистрироваться сейчас!
           </Link>
         </Form.Item>
         <Form.Item>
-        <Button
+          <Button
             type='primary'
             htmlType='submit'
             className='login-form-button'

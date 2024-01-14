@@ -2,8 +2,8 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { LOCAL_STORAGE_TOKEN } from 'src/shared/consts/localStorage';
 import { $api } from 'src/shared/api';
 
-export const customerLogout = createAsyncThunk(
-  'customer/logout',
+export const adminLogout = createAsyncThunk(
+  'admin/logout',
   async (_, thunkApi) => {
     try {
       const res = await $api.post('/logout');

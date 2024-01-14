@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { customerLogin } from '../service/customerLogin';
-import { customerSignup } from '../service/customerSignup';
+import { adminLogin } from '../service/adminLogin';
+import { adminSignup } from '../service/adminSignup';
 import { AuthState } from '../types/auth';
 
 const initialState: AuthState = {
@@ -13,25 +13,25 @@ const authSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(customerSignup.pending, (state) => {
+    builder.addCase(adminSignup.pending, (state) => {
       state.loading = true;
     });
-    builder.addCase(customerSignup.fulfilled, (state) => {
+    builder.addCase(adminSignup.fulfilled, (state) => {
       state.loading = false;
       state.error = '';
     });
-    builder.addCase(customerSignup.rejected, (state, action) => {
+    builder.addCase(adminSignup.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload as string;
     });
-    builder.addCase(customerLogin.pending, (state) => {
+    builder.addCase(adminLogin.pending, (state) => {
       state.loading = true;
     });
-    builder.addCase(customerLogin.fulfilled, (state) => {
+    builder.addCase(adminLogin.fulfilled, (state) => {
       state.loading = false;
       state.error = '';
     });
-    builder.addCase(customerLogin.rejected, (state, action) => {
+    builder.addCase(adminLogin.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload as string;
     });

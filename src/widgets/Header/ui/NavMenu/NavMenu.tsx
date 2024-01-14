@@ -2,7 +2,7 @@ import { BarsOutlined } from '@ant-design/icons';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import cls from './NavMenu.module.scss';
-import { customerLogout } from 'src/entities/Customer';
+import { adminLogout } from 'src/entities/Admin';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from 'src/shared/hooks/useAppDispatch';
 import { StateSchema } from 'src/app/provider/StoreProvider/config/StateSchema';
@@ -10,9 +10,9 @@ import { StateSchema } from 'src/app/provider/StoreProvider/config/StateSchema';
 export const NavMenu: React.FC = () => {
   const [open, setOpen] = React.useState(false);
   const dispatch = useAppDispatch();
-  const { customer } = useSelector((state: StateSchema) => state.customer);
+  const { admin } = useSelector((state: StateSchema) => state.admin);
   const logoutFetch = () => {
-    dispatch(customerLogout());
+    dispatch(adminLogout());
   };
   return (
     <React.Fragment>
@@ -32,7 +32,11 @@ export const NavMenu: React.FC = () => {
             <li onClick={() => setOpen(!open)}>
               <Link to='/'>Главная</Link>
             </li>
-            {!customer && (
+            {admin ? (
+              <li onClick={() => setOpen(!open)}>
+              <Link to='/admin'>Мой клуб</Link>
+            </li>
+            ) : (
               <>
                 <li onClick={() => setOpen(!open)}>
                   <Link to='/login'>Войти</Link>
@@ -48,7 +52,7 @@ export const NavMenu: React.FC = () => {
             <li onClick={() => setOpen(!open)}>
               <Link to='/about'>О проекте</Link>
             </li>
-            {customer && <h2 onClick={logoutFetch}>Выйти</h2>}
+            {admin && <h2 onClick={logoutFetch}>Выйти</h2>}
           </ul>
         </div>
       </div>
