@@ -8,8 +8,8 @@ import { StateSchema } from 'src/app/provider/StoreProvider/config/StateSchema';
 import { useAppDispatch } from 'src/shared/hooks/useAppDispatch';
 import { Loading } from 'src/shared/ui/Loading/Loading';
 import { adminLogin } from '../..';
-import { adminData } from '../../model/types/admin';
 import cls from './LoginForm.module.scss';
+import { adminData } from '../../model/types/auth';
 
 export const LoginForm = () => {
   const [isAdmin, setIsAdmin] = React.useState<boolean>(false);
@@ -30,7 +30,7 @@ export const LoginForm = () => {
       },
     });
   };
-  const onSubmit = async (values: adminData | adminData) => {
+  const onSubmit = async (values: adminData) => {
     const res = await dispatch(adminLogin(values));
     if (res.meta.requestStatus === 'fulfilled') {
       successMessage('Вы авторизовались!');
