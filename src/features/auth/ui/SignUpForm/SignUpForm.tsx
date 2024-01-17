@@ -127,6 +127,8 @@ export const SignUpForm = () => {
           >
             <Input
               prefix={<IdcardOutlined className='site-form-item-icon' />}
+              size='large'
+              type='password'
               placeholder='ID club'
             />
           </Form.Item>
