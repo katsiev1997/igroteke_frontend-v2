@@ -1,4 +1,4 @@
-<a href="igroteke.store"> igroteke.store </a>
+<a href="igroteke.store"> <h1>igroteke.store </h1> </a>
 
 # React + TypeScript + Vite
 
