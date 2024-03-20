@@ -27,6 +27,7 @@ const reserveSlice = createSlice({
       } else if (action.payload < state.from) {
         // alert('Сначала выберите на какое время бронировать, а затем конец брони');
         state.from = null;
+        state.to = null;
       } else if (state.to === null) {
         state.to = action.payload;
       } else {
