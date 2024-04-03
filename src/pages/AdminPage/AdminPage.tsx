@@ -1,23 +1,23 @@
-import React from 'react';
-import cls from './AdminPage.module.scss';
-import { Loading } from 'src/shared/ui/Loading/Loading';
+import React from "react";
+import cls from "./AdminPage.module.scss";
+import { Loading } from "src/shared/ui/Loading/Loading";
 import {
   ExclamationCircleFilled,
   HomeOutlined,
   OrderedListOutlined,
   PhoneOutlined,
-} from '@ant-design/icons';
-import { useAppDispatch } from 'src/shared/hooks/useAppDispatch';
-import { useSelector } from 'react-redux';
-import { fetchClubs } from 'src/entities/Club';
-import { StateSchema } from 'src/app/provider/StoreProvider/config/StateSchema';
-import { setRoom, setTimeReserve } from 'src/features/Reserve';
-import { ReserveAdmin } from 'src/features/Reserve/ui/ReserveAdmin';
-import { Card, message, Button, Modal, Space } from 'antd';
-import { times } from 'src/features/Reserve/model/consts/times';
-import { $api } from 'src/shared/api';
-import { getAuthData } from 'src/entities/Admin';
-import { Status, Time } from 'src/widgets';
+} from "@ant-design/icons";
+import { useAppDispatch } from "src/shared/hooks/useAppDispatch";
+import { useSelector } from "react-redux";
+import { fetchClubs } from "src/entities/Club";
+import { StateSchema } from "src/app/provider/StoreProvider/config/StateSchema";
+import { setRoom, setTimeReserve } from "src/features/Reserve";
+import { ReserveAdmin } from "src/features/Reserve/ui/ReserveAdmin";
+import { Card, message, Button, Modal } from "antd";
+import { times } from "src/features/Reserve/model/consts/times";
+import { $api } from "src/shared/api";
+import { getAuthData } from "src/entities/Admin";
+import { Status, Time } from "src/widgets";
 
 const { confirm } = Modal;
 
@@ -31,7 +31,7 @@ interface DeleteReserveData {
 const AdminPage = () => {
   const dispatch = useAppDispatch();
   const [messageApi, contextHolder] = message.useMessage();
-  const [bookingMode, setBookingMode] = React.useState(true);
+  const [bookingMode, setBookingMode] = React.useState(false);
   const { clubs, status } = useSelector((state: StateSchema) => state.club);
   const { club, room } = useSelector((state: StateSchema) => state.reserve);
   React.useEffect(() => {
@@ -42,21 +42,21 @@ const AdminPage = () => {
   }, [dispatch]);
   const successMessage = (text: string) => {
     messageApi.open({
-      type: 'success',
+      type: "success",
       content: text,
       style: {
-        fontSize: '16px',
-        marginTop: '30vh',
+        fontSize: "16px",
+        marginTop: "30vh",
       },
     });
   };
   const errorMessage = (text: string) => {
     messageApi.open({
-      type: 'error',
+      type: "error",
       content: text,
       style: {
-        fontSize: '16px',
-        marginTop: '30vh',
+        fontSize: "16px",
+        marginTop: "30vh",
       },
     });
   };
@@ -64,7 +64,7 @@ const AdminPage = () => {
 
   const deleteReserve = async (data: DeleteReserveData) => {
     $api
-      .delete('/delete_reserve', { data: data })
+      .delete("/delete_reserve", { data: data })
       .then((res) => {
         successMessage(res.data.message);
         setTimeout(() => {
@@ -78,12 +78,12 @@ const AdminPage = () => {
   };
   const showDeleteConfirm = (reserveData: DeleteReserveData) => {
     confirm({
-      title: 'Удаление брони',
+      title: "Удаление брони",
       icon: <ExclamationCircleFilled />,
-      content: 'Вы действительно хотите удалить бронь?',
-      okText: 'Да',
-      okType: 'danger',
-      cancelText: 'Отменить',
+      content: "Вы действительно хотите удалить бронь?",
+      okText: "Да",
+      okType: "danger",
+      cancelText: "Отменить",
       onOk() {
         deleteReserve(reserveData);
       },
@@ -93,28 +93,28 @@ const AdminPage = () => {
     });
   };
   return (
-    <Space wrap>
+    <>
       <main>
         {contextHolder}
-        {status === 'error' ? (
+        {status === "error" ? (
           <div>
-            <h2 className='error'>Произошла ошибка</h2>
-            <p className='error-text'>
-              К сожалению, возникла ошибка при загрузке страницы. Пожалуйста,
-              попробуйте перезагрузить страницу.
+            <h2 className="error">Произошла ошибка</h2>
+            <p className="error-text">
+              К сожалению, возникла ошибка при загрузке страницы. Пожалуйста, попробуйте
+              перезагрузить страницу.
             </p>
           </div>
-        ) : status === 'loading' ? (
+        ) : status === "loading" ? (
           <Loading />
         ) : (
-          <div>
+          <>
             <h2>{Club.name}</h2>
             <p>
-              {' '}
+              {" "}
               <HomeOutlined /> {Club?.address}
             </p>
             <p className={cls.phone}>
-              {' '}
+              {" "}
               <PhoneOutlined /> +7{Club?.phone}
             </p>
             <hr />
@@ -124,9 +124,9 @@ const AdminPage = () => {
                   {Club.rooms[room].bookings.map((booking) => (
                     <Card
                       className={cls.bookingCard}
-                      style={{ width: 260, color: '#000' }}
-                      headStyle={{ padding: '10px' }}
-                      bodyStyle={{ padding: '10px' }}
+                      style={{ width: 260, color: "#000" }}
+                      headStyle={{ padding: "10px" }}
+                      bodyStyle={{ padding: "10px" }}
                       title={<h4>{`+7${booking.customerData}`}</h4>}
                       extra={
                         <Button
@@ -138,16 +138,15 @@ const AdminPage = () => {
                               to: booking.to,
                             })
                           }
-                          type='dashed'
+                          type="dashed"
                         >
                           Удалить
                         </Button>
                       }
                     >
                       <h3>
-                        {' '}
-                        С {times[booking.from].label} до{' '}
-                        {times[booking.to].label}
+                        {" "}
+                        С {times[booking.from].label} до {times[booking.to].label}
                       </h3>
 
                       <p>{booking._id}</p>
@@ -172,26 +171,27 @@ const AdminPage = () => {
                           dispatch(setRoom(i));
                         }}
                         key={i}
-                        className={
-                          room === i ? `${cls.room} ${cls.active}` : cls.room
-                        }
+                        className={room === i ? `${cls.room} ${cls.active}` : cls.room}
                       >
                         {item.name}
                       </div>
                     ))}
                   </div>
                   <ReserveAdmin />
-                  <OrderedListOutlined
-                    style={{ fontSize: '40px' }}
+                  <div
                     onClick={() => setBookingMode(!bookingMode)}
-                  />
+                    className={cls.play_room_text}
+                  >
+                    <OrderedListOutlined style={{ fontSize: "40px" }} />
+                    Список броней
+                  </div>
                 </div>
               )}
             </div>
-          </div>
+          </>
         )}
       </main>
-    </Space>
+    </>
   );
 };
 

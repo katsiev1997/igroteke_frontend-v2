@@ -41,18 +41,24 @@ export const ReserveClient: React.FC = () => {
         return;
       }
     }
-    window.location.href = `https://wa.me/+7${
-      Club.phone
-    }?text=Бронь Телефон: ${customerData} Клуб: ${Club.name} Комната №: ${room + 1} С ${
-      from && times[from].label
-    } до ${to && times[to + 1].label}`;
     setOpen(true);
+  };
+
+  const whatsapp = () => {
+    window.open(
+      `https://wa.me/+7${Club.phone}?text=Бронь Телефон: ${customerData} Клуб: ${
+        Club.name
+      } Комната №: ${room + 1} С ${from && times[from].label} до ${
+        to && times[to + 1].label
+      }`,
+      "_blank"
+    );
   };
 
   return (
     <React.Fragment>
       {contextHolder}
-      <button onClick={() => createReserve()}>
+      <button onClick={createReserve}>
         <img
           className={cls.booking}
           src="https://img.icons8.com/?size=160&id=79996&format=png"
@@ -91,7 +97,7 @@ export const ReserveClient: React.FC = () => {
           <h3>Укажите время брони!</h3>
         )}
         <Button
-          onClick={createReserve}
+          onClick={() => whatsapp()}
           size="large"
           type="primary"
           style={{ marginTop: "20px" }}

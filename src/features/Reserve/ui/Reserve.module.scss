@@ -1,20 +1,21 @@
 .create_booking {
-  position: fixed;
-  background: #414141;
   display: flex;
+  background: #414141;
   flex-direction: column;
   padding: 30px 20px 20px 20px;
   gap: 10px;
   opacity: 95%;
   max-width: 800px;
   width: 100%;
-  height: 35%;
-  bottom: 0;
-  right: 0;
-  z-index: 40;
+  height: 35%;  
+  z-index: 30;
   margin: 0 auto;
+  transition: all 0.3s;
+  position: absolute;
+  bottom: 0;
+  left: 0;
   transform: translateX(-100%);
-  transition: all 0.1s;
+  visibility: hidden;
 }
 .booking {
   filter: invert(100%);
@@ -23,6 +24,7 @@
   height: 50px;
 }
 .create_booking.active {
-  transform: translateX(0%);
+  transform: translateX(0);
   transition: all 0.2s;
+  visibility: visible;
 }

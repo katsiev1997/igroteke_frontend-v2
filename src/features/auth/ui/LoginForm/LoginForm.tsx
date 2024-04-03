@@ -35,7 +35,7 @@ export const LoginForm = () => {
     if (res.meta.requestStatus === 'fulfilled') {
       successMessage('Вы авторизовались!');
       setTimeout(() => {
-        window.location.href = '/';
+        window.location.href = '/admin';
       }, 1000);
     }
   };
