@@ -1,4 +1,7 @@
-<a href="igroteke.store"> <h1>igroteke.store </h1> </a>
+<a href="igroteke.ru"> <h1>igroteke.ru </h1> </a>
+
+Проект для бронирования мест в игровых клубах
+
 
 # React + TypeScript + Vite
 
